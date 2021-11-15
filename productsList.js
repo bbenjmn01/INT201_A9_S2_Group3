@@ -9,10 +9,10 @@ divHeader.setAttribute(
   "class",
   `flex w-full text-gray-900 text-4xl text-bold justify-center pt-10`
 );
-divHeader.setAttribute(
-  "style",
-  "font-family: 'Prompt', sans-serif; font-size: 3em;"
-);
+// divHeader.setAttribute(
+//   "style",
+//   "font-family: 'Prompt', sans-serif; font-size: 3em;"
+// );
 divHeader.textContent = "iPhone รุ่นไหนที่ใช่สำหรับคุณ";
 
 let bg = document.querySelector("body");
@@ -26,14 +26,21 @@ if (theme == "dark") {
 }
 
 function darkTheme() {
-  let header = document.querySelector("#header");
-  bg.style.backgroundColor = "#F3F4F6";
+  divHeader.setAttribute(
+    "style",
+    "font-family: 'Prompt', sans-serif; font-size: 3em; color: white;"
+  );
+  bg.style.backgroundColor = "#828282";
   dark.style.backgroundColor = "#A0A0A0";
   light.style.backgroundColor = "#D1D5DB";
 }
 
 function lightTheme() {
-  bg.style.backgroundColor = "#828282";
+  divHeader.setAttribute(
+    "style",
+    "font-family: 'Prompt', sans-serif; font-size: 3em; color: black;"
+  );
+  bg.style.backgroundColor = "#F3F4F6";
   light.style.backgroundColor = "#A0A0A0";
   dark.style.backgroundColor = "#D1D5DB";
 }
