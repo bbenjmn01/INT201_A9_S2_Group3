@@ -30,7 +30,12 @@ function darkTheme() {
     "style",
     "font-family: 'Prompt', sans-serif; font-size: 3em; color: white;"
   );
-  bg.style.backgroundColor = "#828282";
+  let productbg = document.querySelectorAll(".product");
+  // productbg.forEach((pd) => {
+  //   // pd.style.backgroundColor = "#fff";
+
+  // });
+  bg.style.backgroundColor = "#000";
   dark.style.backgroundColor = "#A0A0A0";
   light.style.backgroundColor = "#D1D5DB";
 }
@@ -71,7 +76,10 @@ function showProducts() {
     let divEachProduct = document.createElement("div");
     divEachProduct.setAttribute("id", pd.product_id);
     divEachProduct.setAttribute("class", "product");
-
+    divEachProduct.setAttribute(
+      "style",
+      "background-color: #fff; border-radius: 25px;"
+    );
     let divName = document.createElement("div");
     divName.setAttribute("class", "mt-4 flex justify-center text-3xl");
     divName.textContent = pd.product_name;
@@ -100,7 +108,7 @@ function showProducts() {
     divPriceAdd.setAttribute("class", "mt-4 flex justify-between");
 
     let divPrice = document.createElement("div");
-    divPrice.setAttribute("class", "mt-2 text-2xl text-gray-900 pr-10");
+    divPrice.setAttribute("class", "ml-5 mt-2 text-2xl text-gray-900 pr-10");
     divPrice.textContent = `${pd.product_price}฿`;
 
     let add = document.createElement("button");
@@ -108,7 +116,7 @@ function showProducts() {
       add.setAttribute("type", "submit");
       add.setAttribute(
         "class",
-        "mt-0 w-full bg-blue-500 transition duration-200 border border-transparent rounded-2xl py-3 px-3 flex items-center justify-center text-base font-sm text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        "mb-3 mr-3 w-full bg-blue-500 transition duration-200 border border-transparent rounded-2xl py-3 px-3 flex items-center justify-center text-base font-sm text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       );
       add.textContent = "Add to Cart";
       add.addEventListener("click", addProductToCart);
@@ -116,7 +124,7 @@ function showProducts() {
     } else {
       add.setAttribute(
         "class",
-        "mt-0 w-full bg-gray-300 rounded-2xl py-3 px-3 flex items-center justify-center text-base font-sm text-white"
+        "mb-3 mr-3 w-full bg-gray-300 rounded-2xl py-3 px-3 flex items-center justify-center text-base font-sm text-white"
       );
       add.textContent = "Out Of Stock";
     }
