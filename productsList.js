@@ -1,6 +1,7 @@
 import { products } from "./products.js";
-import { addProductToCart } from "./product-cart.js";
+import { addProductToCart, createCookie } from "./product-cart.js";
 import { searchProductName, filter } from "./product-search.js";
+// import { CookieUtil } from "./cookie.js";
 
 // header
 const divHeader = document.querySelector("#header");
@@ -13,6 +14,39 @@ divHeader.setAttribute(
   "font-family: 'Prompt', sans-serif; font-size: 3em;"
 );
 divHeader.textContent = "iPhone รุ่นไหนที่ใช่สำหรับคุณ";
+
+let bg = document.querySelector("body");
+let dark = document.querySelector("#dark");
+let light = document.querySelector("#light");
+let theme = localStorage.getItem("theme");
+if (theme == "dark") {
+  darkTheme();
+} else {
+  lightTheme();
+}
+
+function darkTheme() {
+  let header = document.querySelector("#header");
+  bg.style.backgroundColor = "#F3F4F6";
+  dark.style.backgroundColor = "#A0A0A0";
+  light.style.backgroundColor = "#D1D5DB";
+}
+
+function lightTheme() {
+  bg.style.backgroundColor = "#828282";
+  light.style.backgroundColor = "#A0A0A0";
+  dark.style.backgroundColor = "#D1D5DB";
+}
+
+dark.addEventListener("click", function () {
+  darkTheme();
+  localStorage.setItem("theme", "dark");
+});
+
+light.addEventListener("click", function () {
+  lightTheme();
+  localStorage.setItem("theme", "light");
+});
 
 // products
 const divProducts = document.querySelector("#products");
@@ -71,6 +105,7 @@ function showProducts() {
       );
       add.textContent = "Add to Cart";
       add.addEventListener("click", addProductToCart);
+      add.addEventListener("click", createCookie);
     } else {
       add.setAttribute(
         "class",
@@ -91,4 +126,3 @@ document
   .addEventListener("keyup", searchProductName);
 
 document.querySelector("#searchBox").addEventListener("keyup", filter);
-
