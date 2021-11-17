@@ -27,7 +27,6 @@ export class CookieUtil {
 
     if (expires instanceof Date) {
       cookieText += `; expires=${expires.toUTCString()}`;
-      // cookieText += `; expires=${expires}`;
     }
 
     console.log(`cookieText = ${cookieText}`);

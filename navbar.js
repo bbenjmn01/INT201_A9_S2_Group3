@@ -1,6 +1,18 @@
-// import { countProductInCart } from "./product-cart";
+import { CookieUtil } from "./cookie.js";
 
 const navbar = document.querySelector("#navbar");
+
+let topNav = document.createElement("nav");
+topNav.setAttribute("class", "p-4")
+topNav.setAttribute("style", "background-color: #ffffff")
+topNav.innerHTML = `<div class="max-w-6xl mx-auto px-4"> 
+                        <div class="flex justify-center">
+                            <div id="userStatus">
+
+                            </div>
+                        </div>
+                    </div>`
+navbar.appendChild(topNav);
 
 let navElem = document.createElement("nav");
 
@@ -144,3 +156,7 @@ btnDeleteProduct.setAttribute("id", "deleteProductInCart");
 btnDeleteProduct.setAttribute("type", "submit");
 btnDeleteProduct.textContent = "Delete";
 secondNav.appendChild(btnDeleteProduct);
+
+// show login user
+let userLogin = document.querySelector("#userStatus");
+userLogin.textContent = `Welcome ${CookieUtil.get('user')} !`;

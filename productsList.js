@@ -1,5 +1,5 @@
 import { products } from "./products.js";
-import { addProductToCart, createCookie } from "./product-cart.js";
+import { addProductToCart } from "./product-cart.js";
 import { searchProductName, filter } from "./product-search.js";
 // import { CookieUtil } from "./cookie.js";
 
@@ -30,11 +30,6 @@ function darkTheme() {
     "style",
     "font-family: 'Prompt', sans-serif; font-size: 3em; color: white;"
   );
-  let productbg = document.querySelectorAll(".product");
-  // productbg.forEach((pd) => {
-  //   // pd.style.backgroundColor = "#fff";
-
-  // });
   bg.style.backgroundColor = "#000";
   dark.style.backgroundColor = "#A0A0A0";
   light.style.backgroundColor = "#D1D5DB";
@@ -120,7 +115,6 @@ function showProducts() {
       );
       add.textContent = "Add to Cart";
       add.addEventListener("click", addProductToCart);
-      add.addEventListener("click", createCookie);
     } else {
       add.setAttribute(
         "class",
