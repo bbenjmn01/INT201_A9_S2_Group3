@@ -37,8 +37,7 @@ export function addProductToCart(event) {
 
 // count all product in cart
 export function countProductInCart() {
-  let sum = Object.values(productInCart).reduce((t, {qty}) => t + qty, 0);
-  return sum;
+  return Object.values(productInCart).reduce((temp, {qty}) => temp + qty, 0);
 }
 
 // delete all product in cart
