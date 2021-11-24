@@ -1,71 +1,35 @@
 import { products } from "./products.js";
-import { addProductToCart } from "./product-cart.js";
-import { searchProductName, filter } from "./product-search.js";
-// import { CookieUtil } from "./cookie.js";
+import { cart } from "./product-cart.js";
+import { filter } from "./product-search.js";
 
-// header
-const divHeader = document.querySelector("#header");
+// เป็นการสร้าง node ผ่านการเข้าถึง id ของ header ซึ่งเป็นส่วนในการแสดงชื่อหัวข้อ
+export const divHeader = document.querySelector("#header");
+
+// กำหนด attribute ใน class ของ #header
 divHeader.setAttribute(
   "class",
   `flex w-full text-gray-900 text-4xl text-bold justify-center pt-10`
 );
-// divHeader.setAttribute(
-//   "style",
-//   "font-family: 'Prompt', sans-serif; font-size: 3em;"
-// );
+
+// update header ด้วย textContent
 divHeader.textContent = "iPhone รุ่นไหนที่ใช่สำหรับคุณ";
 
-let bg = document.querySelector("body");
-let dark = document.querySelector("#dark");
-let light = document.querySelector("#light");
-let theme = localStorage.getItem("theme");
-if (theme == "dark") {
-  darkTheme();
-} else {
-  lightTheme();
-}
-
-function darkTheme() {
-  divHeader.setAttribute(
-    "style",
-    "font-family: 'Prompt', sans-serif; font-size: 3em; color: white;"
-  );
-  bg.style.backgroundColor = "#000";
-  dark.style.backgroundColor = "#A0A0A0";
-  light.style.backgroundColor = "#D1D5DB";
-}
-
-function lightTheme() {
-  divHeader.setAttribute(
-    "style",
-    "font-family: 'Prompt', sans-serif; font-size: 3em; color: black;"
-  );
-  bg.style.backgroundColor = "#F3F4F6";
-  light.style.backgroundColor = "#A0A0A0";
-  dark.style.backgroundColor = "#D1D5DB";
-}
-
-dark.addEventListener("click", function () {
-  darkTheme();
-  localStorage.setItem("theme", "dark");
-});
-
-light.addEventListener("click", function () {
-  lightTheme();
-  localStorage.setItem("theme", "light");
-});
-
-// products
+// เป็นการสร้าง node ผ่านการเข้าถึง id ของ products ซึ่งเป็นส่วนในการแสดงสินค้า
 const divProducts = document.querySelector("#products");
+
+// กำหนด attribute ใน class ของ #products
 divProducts.setAttribute(
   "class",
   `mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8`
 );
+
+// กำหนด attribute ใน style ของ #products
 divProducts.setAttribute("style", "margin-bottom: 5%;");
 
-// show all product with for-loop
+// แสดงสินค้าทั้งหมดที่มีใน products
 showProducts();
 
+// เป็น function ไว้สำหรับการดึงข้อมูลที่อยู่ใน Products ทั้งหมดและนำมาแสดงผล
 function showProducts() {
   for (const pd of products) {
     let divEachProduct = document.createElement("div");
@@ -75,6 +39,7 @@ function showProducts() {
       "style",
       "background-color: #fff; border-radius: 25px;"
     );
+
     let divName = document.createElement("div");
     divName.setAttribute("class", "mt-4 flex justify-center text-3xl");
     divName.textContent = pd.product_name;
@@ -107,6 +72,10 @@ function showProducts() {
     divPrice.textContent = `${pd.product_price}฿`;
 
     let add = document.createElement("button");
+
+    // เช็ค value ของ stock
+    // หากมากกว่า 0 จะแสดงผลเป็น Add to Cart และสามารถกดได้
+    // หากน้อยกว่าหรือเท่ากับ 0 จะแสดงผลเป็น Out Of Stock และไม่สามารถกดได้
     if (pd.stock > 0) {
       add.setAttribute("type", "submit");
       add.setAttribute(
@@ -114,7 +83,9 @@ function showProducts() {
         "mb-3 mr-3 w-full bg-blue-500 transition duration-200 border border-transparent rounded-2xl py-3 px-3 flex items-center justify-center text-base font-sm text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       );
       add.textContent = "Add to Cart";
-      add.addEventListener("click", addProductToCart);
+
+      // ใส่ event เมื่อปล่อยปุ่มออกจากตัวอักษรนั้น ๆ จะเรียกใช่ function addProductToCart เพื่อเป็นการเพิ่มสินค้าเข้าในตะกร้าสินค้า
+      add.addEventListener("click", cart.addProductToCart);
     } else {
       add.setAttribute(
         "class",
@@ -123,15 +94,10 @@ function showProducts() {
       add.textContent = "Out Of Stock";
     }
 
+    // แทรก element ทั้งหมดลงไปใน element ที่ได้กำหนดไว้
     divPriceAdd.appendChild(divPrice);
     divPriceAdd.appendChild(add);
     divEachProduct.appendChild(divPriceAdd);
     divProducts.appendChild(divEachProduct);
   }
 }
-
-document
-  .querySelector("#searchBox")
-  .addEventListener("keyup", searchProductName);
-
-document.querySelector("#searchBox").addEventListener("keyup", filter);

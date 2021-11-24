@@ -3,15 +3,15 @@ import { CookieUtil } from "./cookie.js";
 const navbar = document.querySelector("#navbar");
 
 let topNav = document.createElement("nav");
-topNav.setAttribute("class", "p-4")
-topNav.setAttribute("style", "background-color: #ffffff")
+topNav.setAttribute("class", "p-4");
+topNav.setAttribute("style", "background-color: #ffffff");
 topNav.innerHTML = `<div class="max-w-6xl mx-auto px-4"> 
                         <div class="flex justify-center">
                             <div id="userStatus">
 
                             </div>
                         </div>
-                    </div>`
+                    </div>`;
 navbar.appendChild(topNav);
 
 let navElem = document.createElement("nav");
@@ -124,6 +124,7 @@ btnSearch.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" vie
     </svg>`;
 secondNav.appendChild(btnSearch);
 
+// add event ให้ btnSearch เป็น toggle เมื่อ click หาก "hidden" อยู่จะเปลี่ยนเป็น "visible", หาก "visible" อยู่จะเปลี่ยนเป็น "hidden"
 btnSearch.addEventListener("click", () => {
   let searchBox = document.querySelector("#searchBox");
   if (searchBox.style.visibility === "hidden") {
@@ -148,6 +149,7 @@ amount.setAttribute(
   "class",
   "justify-items-center text-center px-2 py3 rounded-2xl text-black"
 );
+
 secondNav.appendChild(amount);
 
 // button for delete all product in cart
@@ -159,4 +161,4 @@ secondNav.appendChild(btnDeleteProduct);
 
 // show login user
 let userLogin = document.querySelector("#userStatus");
-userLogin.textContent = `Welcome ${CookieUtil.get('user')} !`;
+userLogin.textContent = `Welcome ${CookieUtil.get("user")} !`;
